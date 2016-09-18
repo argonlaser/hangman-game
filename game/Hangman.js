@@ -13,13 +13,15 @@ Colors.setTheme({
 });
 
 class HangmanGame {
-  constructor(input, output, fileName) {
+  constructor(gameOptions) {
+    console.log('GO - '+ gameOptions)
+    this.datasrcFile = gameOptions.datasrcFile;
     this.chances = 7;
     this.gameState = -1;
-    this.hangmanWord = this.getRandomHangmanWord(fileName);
-    this.initIOStream(input, output);
+    this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile);
+    this.initIOStream(gameOptions.input, gameOptions.output);
     this.initHangmanTable();
-    this.initHighScore('./results/results.txt');
+    this.initHighScore(gameOptions.resultFile);
   }
 
   initHangmanTable() {
@@ -32,6 +34,7 @@ class HangmanGame {
   }
 
   initIOStream(input, output) {
+    console.log(input)
     this.input = input;
     this.output = output;
     this.input.setRawMode(true);
@@ -139,14 +142,11 @@ class HangmanGame {
     const self = this;
     const singleAlphaRegex = /^[a-zA-Z]$/;
     self.render();
-    self.input.on('keypress', function (ch, key) {
-      if (!singleAlphaRegex.test(key.name.toString())) {
+    self.input.on('keypress', function (ch, key) {      
+      if (!key || !singleAlphaRegex.test(key.name.toString())) {
         return;
       }
-      if (key && key.ctrl && key.name == 'c') {
-        console.log('Magilchi !');
-        process.exit(0);
-      }
+
       self.updateGame(key.name);
       self.render();
     });
