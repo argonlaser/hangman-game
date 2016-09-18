@@ -1,0 +1,35 @@
+{
+  "name": "hangman-game",
+  "version": "1.0.0",
+  "description": "Guessing words is fun !!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/argonlaser/hangman-game.git"
+  },
+  "keywords": [
+    "hangman",
+    "gre",
+    "wordist",
+    "words",
+    "memorize",
+    "vocabulary",
+    "meaning"
+  ],
+  "author": "Venkata krishna Sundararajan (vkvenkat94@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/argonlaser/hangman-game/issues"
+  },
+  "homepage": "https://github.com/argonlaser/hangman-game#readme",
+  "dependencies": {
+    "cli-clear": "^1.0.4",
+    "cli-table": "^0.3.1",
+    "fs": "0.0.1-security",
+    "keypress": "^0.2.1",
+    "path": "^0.12.7"
+  }
+}
