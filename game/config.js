@@ -6,10 +6,6 @@ const axel = require('axel')
 function initGameUI () {
   axel.clear()
   axel.brush = '.'
-  axel.line(0, 0, 110, 0)
-  axel.line(0, 0, 0, 50)
-  axel.line(110, 0, 110, 50)
-  axel.line(0, 50, 110, 50)
   console.log()
 }
 
@@ -23,6 +19,7 @@ const gameOptions =
       resultFile: resultFile,
       onInit: function () {
         initGameUI()
+        axel.text(5, 60, JSON.stringify(this.tableContent))
         // Initialise all game related resources here
       },
       onEnd: function () {

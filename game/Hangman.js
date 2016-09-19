@@ -24,7 +24,7 @@ class HangmanGame {
     this.initHighScore(this.resultFile)
 
     if (typeof gameOptions.onInit === 'function') {
-      gameOptions.onInit()
+      gameOptions.onInit.call(this)
     }
 
     // console.log('word is ' + JSON.stringify(this.hangmanWord))
@@ -173,13 +173,14 @@ class HangmanGame {
     }
 
     const isRightGuess = self.guessKey(key)
+
     if (isRightGuess) {
       if (typeof correctGuess === 'function') {
-        correctGuess()
+        correctGuess.call(this)
       }
     } else {
       if (typeof wrongGuess === 'function') {
-        wrongGuess()
+        wrongGuess.call(this)
       }
     }
   }
