@@ -4,7 +4,22 @@
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
 const gameOptions = require('./game/config')
+const HangmanArt = require('hangman-cli-art')
+const axel = require('axel')
+const hangmanGREwordsFile = './data/gre_words.json'
+const resultFile = './results/results.json'
+
 let game = null
+const hangmanArt = new HangmanArt({
+  marginX: 60,
+  marginY: 5
+})
+
+axel.brush = '.'
+axel.line(0, 0, 110, 0)
+axel.line(0, 0, 0, 50)
+axel.line(110, 0, 110, 50)
+axel.line(0, 50, 110, 50)
 
 program
   .version('0.0.1')
@@ -12,16 +27,29 @@ program
   .option('-f, --freq', 'Shows frequent gre words')
   .parse(process.argv)
 
-if (program.freq) {
-  game = new HangmanGame(gameOptions[0])
-} else if (program.gre) {
-  game = new HangmanGame(gameOptions[1])
-} else {
-  // Default is high frequency game
-  game = new HangmanGame(gameOptions[0])
-}
-
+// if (program.freq) {
+//   game = new HangmanGame(gameOptions[0])
+// } else if (program.gre) {
+//   game = new HangmanGame(gameOptions[1])
+// } else {
+//   // Default is high frequency game
+//   game = new HangmanGame(gameOptions[0])
+// }
 // game.start()
+
+game = new HangmanGame({
+  name: 'gre_words',
+  input: process.stdin,
+  output: process.stdout,
+  datasrcFile: hangmanGREwordsFile,
+  resultFile: resultFile,
+  onInit: function () {
+    // Initialise all game related resources here
+  },
+  onEnd: function () {
+    // Save all game related resources here
+  }
+})
 
 process.stdin.on('keypress', function (ch, key) {
   if (key && key.ctrl && key.name === 'c') {
@@ -32,11 +60,11 @@ process.stdin.on('keypress', function (ch, key) {
     key.name,
     function () {
       // correct Guess
-      console.log('render for correct guess')
+      axel.text(10, 10, key.name)
     },
     function () {
       // wrong Guess
-      console.log('render for wrong guess')
+      hangmanArt.next()
     }
   )
 })

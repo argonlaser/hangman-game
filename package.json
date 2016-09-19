@@ -35,10 +35,12 @@
   },
   "homepage": "https://github.com/argonlaser/hangman-game#readme",
   "dependencies": {
+    "axel": "0.0.3",
     "cli-clear": "^1.0.4",
     "cli-table": "^0.3.1",
     "commander": "^2.9.0",
     "fs": "0.0.1-security",
+    "hangman-cli-art": "^1.0.1",
     "keypress": "^0.2.1"
   },
   "devDependencies": {

@@ -22,7 +22,12 @@ class HangmanGame {
     this.initIOStream(gameOptions.input, gameOptions.output)
     this.initHangmanTable()
     this.initHighScore(this.resultFile)
-    console.log('word is ' + JSON.stringify(this.hangmanWord))
+
+    if (typeof gameOptions.onInit === 'function') {
+      gameOptions.onInit()
+    }
+
+    // console.log('word is ' + JSON.stringify(this.hangmanWord))
   }
 
   initHangmanTable () {
