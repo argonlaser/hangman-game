@@ -16,11 +16,13 @@ class HangmanGame {
   constructor (gameOptions) {
     this.chances = 7
     this.gameState = -1
+    this.currentScore = 0
     this.resultFile = gameOptions.resultFile
     this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile)
     this.initIOStream(gameOptions.input, gameOptions.output)
     this.initHangmanTable()
     this.initHighScore(this.resultFile)
+    console.log('word is ' + JSON.stringify(this.hangmanWord))
   }
 
   initHangmanTable () {
@@ -40,7 +42,6 @@ class HangmanGame {
   }
 
   initHighScore (resultFile) {
-    this.currentScore = 0
     this.highestScore = this.readHighestScore(resultFile)
   }
 
@@ -123,7 +124,7 @@ class HangmanGame {
     }
   }
 
-  updateGame (keyGuessed) {
+  guessKey (keyGuessed) {
     var self = this
     const hangmanTerm = self.hangmanWord.term
     if (!hangmanTerm.includes(keyGuessed)) {
@@ -131,11 +132,15 @@ class HangmanGame {
       if (self.chances <= 0) {
         self.tableContent = hangmanTerm.split('')
       }
+
+      return false
     } else {
       const indicesFound = self.charPos(hangmanTerm, keyGuessed)
       indicesFound.forEach(function (index) {
         self.tableContent[index] = keyGuessed.success
       })
+
+      return true
     }
   }
 
@@ -149,9 +154,29 @@ class HangmanGame {
         return
       }
 
-      self.updateGame(key.name)
+      self.guessKey(key.name)
       self.render()
     })
+  }
+
+  nextTurn (key, correctGuess, wrongGuess) {
+    const self = this
+    const singleAlphaRegex = /^[a-zA-Z]$/
+
+    if (!key || !singleAlphaRegex.test(key)) {
+      return
+    }
+
+    const isRightGuess = self.guessKey(key)
+    if (isRightGuess) {
+      if (typeof correctGuess === 'function') {
+        correctGuess()
+      }
+    } else {
+      if (typeof wrongGuess === 'function') {
+        wrongGuess()
+      }
+    }
   }
 }
 
