@@ -14,14 +14,13 @@ Colors.setTheme({
 
 class HangmanGame {
   constructor(gameOptions) {
-    console.log('GO - '+ gameOptions)
-    this.datasrcFile = gameOptions.datasrcFile;
     this.chances = 7;
     this.gameState = -1;
+    this.resultFile = gameOptions.resultFile;
     this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile);
     this.initIOStream(gameOptions.input, gameOptions.output);
     this.initHangmanTable();
-    this.initHighScore(gameOptions.resultFile);
+    this.initHighScore(this.resultFile);
   }
 
   initHangmanTable() {
@@ -34,16 +33,15 @@ class HangmanGame {
   }
 
   initIOStream(input, output) {
-    console.log(input)
     this.input = input;
     this.output = output;
     this.input.setRawMode(true);
     keypress(this.input);
   }
 
-  initHighScore(input, output) {
+  initHighScore(resultFile) {
     this.currentScore = 0;
-    this.highestScore = this.readHighestScore('./results/results.txt');
+    this.highestScore = this.readHighestScore(resultFile);
   }
 
   charPos(str, char) {
@@ -54,9 +52,10 @@ class HangmanGame {
     });
   }
 
-  readHighestScore(resultsFile) {
+  readHighestScore(resultFile) {  
     try {
-      return parseInt(FS.readFileSync(resultsFile).toString());
+      const result = fs.readFileSync(resultFile).toString();
+      return result.duration;
     }
     catch (err) {
       return 0;
@@ -76,22 +75,28 @@ class HangmanGame {
   getResult() {
     const chances = this.chances;
     const tableContent = this.tableContent;
-    console.log('Get Result :' + tableContent);
-    console.log('Get Result Index :' + tableContent.indexOf('_'));
-    console.log('Get result chances :' + chances);
-    console.log('Game State :' + this.gameState);
     if (tableContent.indexOf('_') <= -1 && chances >= 0) {
       this.gameState = 1;
+      this.duration =  Date.now() - this.startTime;
     }
     if (chances <= 0) {
       this.gameState = 0;
     }
+//    console.log('Get Result :' + tableContent);
+//    console.log('Get Result Index :' + tableContent.indexOf('_'));
+//    console.log('Get result chances :' + chances);
+//    console.log('Game State :' + this.gameState);
     return this.gameState;
   }
 
   saveScore() {
-    if (this.currScore > this.highestScore) {
-      FS.writeFileSync('./results/results.txt', this.score.toString());
+    var result = this.hangmanWord;
+    result.duration = this.duration;
+    try {
+      fs.writeFileSync(this.resultFile, JSON.stringify(result));
+    }
+    catch(err) {
+      console.error('File exception : '+ err);
     }
   }
 
@@ -99,19 +104,18 @@ class HangmanGame {
     const self = this;
     const hangmanTerm = self.hangmanWord.term;
     self.clear();
-    console.log('chances: ' + self.chances);
+
     const table = new Table({
       colWidths: this._initialiseHangmanWordSlot(hangmanTerm, 3)
     });
     table.push(self.tableContent);
     const result = self.getResult();
-    console.log('Result : ' + result)
-    this.saveScore();
     console.log(table.toString());
     console.log('MEANING: ' + self.hangmanWord.definition)
     switch (result) {
     case 1:
       self.output.write('\nYou won'.success);
+      this.saveScore();
       process.exit(0);
       break;
     case 0:
@@ -133,7 +137,7 @@ class HangmanGame {
     else {
       const indicesFound = self.charPos(hangmanTerm, keyGuessed);
       indicesFound.forEach(function (index) {
-        self.tableContent[index] = keyGuessed;
+        self.tableContent[index] = keyGuessed.success;
       });
     }
   }
@@ -141,6 +145,7 @@ class HangmanGame {
   start() {
     const self = this;
     const singleAlphaRegex = /^[a-zA-Z]$/;
+    this.startTime = Date.now();
     self.render();
     self.input.on('keypress', function (ch, key) {      
       if (!key || !singleAlphaRegex.test(key.name.toString())) {

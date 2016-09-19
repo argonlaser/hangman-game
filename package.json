@@ -4,7 +4,8 @@
   "description": "Guessing words is fun !!!",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node index.js",
+    "test": "mocha -R spec --recursive test"
   },
   "repository": {
     "type": "git",
@@ -32,5 +33,10 @@
     "fs": "0.0.1-security",
     "keypress": "^0.2.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.13.1",
+    "mocha": "^2.3.3"
   }
 }

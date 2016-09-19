@@ -2,27 +2,9 @@
 'use strict';
 
 const HangmanGame = require('./game/Hangman');
-const hangmanHFwordsFile = './data/hf_words.json';
-const hangmanGREwordsFile = './data/gre_words.json';
-const resultFile = './results/result.txt';
 const program = require('commander');
+const gameOptions = require('./game/config')
 let game = null;
-
-const gameOptions = 
-      [
-        {
-          input:process.stdin,
-          output: process.stdout,
-          datasrcFile:hangmanHFwordsFile,
-          resultFile:resultFile
-        },
-        {
-          input:process.stdin,
-          output: process.stdout,
-          datasrcFile:hangmanGREwordsFile,
-          resultFile:resultFile
-        }
-      ];
 
 program
   .version('0.0.1')
