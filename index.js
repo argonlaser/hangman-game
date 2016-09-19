@@ -13,12 +13,6 @@ const hangmanArt = new HangmanArt({
   marginY: 5
 })
 
-axel.brush = '.'
-axel.line(0, 0, 110, 0)
-axel.line(0, 0, 0, 50)
-axel.line(110, 0, 110, 50)
-axel.line(0, 50, 110, 50)
-
 program
   .version('0.0.1')
   .option('-g, --gre', 'Shows gre words')
