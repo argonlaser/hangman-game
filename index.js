@@ -21,10 +21,22 @@ if (program.freq) {
   game = new HangmanGame(gameOptions[0])
 }
 
-game.start()
+// game.start()
 
 process.stdin.on('keypress', function (ch, key) {
   if (key && key.ctrl && key.name === 'c') {
     process.exit(0)
   }
+
+  game.nextTurn(
+    key.name,
+    function () {
+      // correct Guess
+      console.log('render for correct guess')
+    },
+    function () {
+      // wrong Guess
+      console.log('render for wrong guess')
+    }
+  )
 })
