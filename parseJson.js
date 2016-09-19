@@ -2,27 +2,24 @@
  * in a synchronous manner.
  */
 
-module.exports = function(fileName) {
-  const fs = require('fs');
-  const path = require('path');
-  
-  var greWordsJson = null;
-  var fileContents = null;
-  
+module.exports = function (fileName) {
+  const fs = require('fs')
+
+  var greWordsJson = null
+  var fileContents = null
+
   try {
-    fileContents = fs.readFileSync(fileName).toString();
-  }
-  catch (err) {
-    console.error('File exception : ' + err);
-    return greWordsJson;
+    fileContents = fs.readFileSync(fileName).toString()
+  } catch (err) {
+    console.error('File exception : ' + err)
+    return greWordsJson
   }
   try {
-    greWordsJson = JSON.parse(fileContents);
-  }
-  catch(err) {
-    console.error('Error parsing json : ' + err);
-    return greWordsJson;
+    greWordsJson = JSON.parse(fileContents)
+  } catch (err) {
+    console.error('Error parsing json : ' + err)
+    return greWordsJson
   }
 
-  return greWordsJson;
+  return greWordsJson
 }

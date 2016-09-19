@@ -1,161 +1,158 @@
-'use strict';
+'use strict'
 const parseJson = require('../parseJson.js')
-  , Colors = require('colors')
-  , keypress = require('keypress')
-  , Table = require('cli-table')
-  , clearCli = require('cli-clear')
-  , fs = require('fs');
+const Colors = require('colors')
+const keypress = require('keypress')
+const Table = require('cli-table')
+const clearCli = require('cli-clear')
+const fs = require('fs')
 
 Colors.setTheme({
   success: 'green',
   b: 'bold',
   fail: 'red'
-});
+})
 
 class HangmanGame {
-  constructor(gameOptions) {
-    this.chances = 7;
-    this.gameState = -1;
-    this.resultFile = gameOptions.resultFile;
-    this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile);
-    this.initIOStream(gameOptions.input, gameOptions.output);
-    this.initHangmanTable();
-    this.initHighScore(this.resultFile);
+  constructor (gameOptions) {
+    this.chances = 7
+    this.gameState = -1
+    this.resultFile = gameOptions.resultFile
+    this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile)
+    this.initIOStream(gameOptions.input, gameOptions.output)
+    this.initHangmanTable()
+    this.initHighScore(this.resultFile)
   }
 
-  initHangmanTable() {
-    this.tableContent = this._initialiseHangmanWordSlot(this.hangmanWord.term.length, '_');
+  initHangmanTable () {
+    this.tableContent = this._initialiseHangmanWordSlot(this.hangmanWord.term.length, '_')
   }
 
-  getRandomHangmanWord(fileName) {
-    const wordsJson = parseJson(fileName);
-    return wordsJson[Math.floor(Math.random() * wordsJson.length)];
+  getRandomHangmanWord (fileName) {
+    const wordsJson = parseJson(fileName)
+    return wordsJson[Math.floor(Math.random() * wordsJson.length)]
   }
 
-  initIOStream(input, output) {
-    this.input = input;
-    this.output = output;
-    this.input.setRawMode(true);
-    keypress(this.input);
+  initIOStream (input, output) {
+    this.input = input
+    this.output = output
+    this.input.setRawMode(true)
+    keypress(this.input)
   }
 
-  initHighScore(resultFile) {
-    this.currentScore = 0;
-    this.highestScore = this.readHighestScore(resultFile);
+  initHighScore (resultFile) {
+    this.currentScore = 0
+    this.highestScore = this.readHighestScore(resultFile)
   }
 
-  charPos(str, char) {
+  charPos (str, char) {
     return str.split('').map(function (c, i) {
-      if (c == char) return i;
+      if (c === char) return i
     }).filter(function (v) {
-      return v >= 0;
-    });
+      return v >= 0
+    })
   }
 
-  readHighestScore(resultFile) {  
+  readHighestScore (resultFile) {
     try {
-      const result = fs.readFileSync(resultFile).toString();
-      return result.duration;
-    }
-    catch (err) {
-      return 0;
+      const result = fs.readFileSync(resultFile).toString()
+      return result.duration
+    } catch (err) {
+      return 0
     }
   }
 
-  clear() {
-    clearCli();
-  }
-  
-  _initialiseHangmanWordSlot(size, value) {
-    const array = [];
-    while (size--) array[size] = value;
-    return array;
+  clear () {
+    clearCli()
   }
 
-  getResult() {
-    const chances = this.chances;
-    const tableContent = this.tableContent;
+  _initialiseHangmanWordSlot (size, value) {
+    const array = []
+    while (size--) array[size] = value
+    return array
+  }
+
+  getResult () {
+    const chances = this.chances
+    const tableContent = this.tableContent
     if (tableContent.indexOf('_') <= -1 && chances >= 0) {
-      this.gameState = 1;
-      this.duration =  Date.now() - this.startTime;
+      this.gameState = 1
+      this.duration = Date.now() - this.startTime
     }
     if (chances <= 0) {
-      this.gameState = 0;
+      this.gameState = 0
     }
-//    console.log('Get Result :' + tableContent);
-//    console.log('Get Result Index :' + tableContent.indexOf('_'));
-//    console.log('Get result chances :' + chances);
-//    console.log('Game State :' + this.gameState);
-    return this.gameState;
+    //    console.log('Get Result :' + tableContent)
+    //    console.log('Get Result Index :' + tableContent.indexOf('_'))
+    //    console.log('Get result chances :' + chances)
+    //    console.log('Game State :' + this.gameState)
+    return this.gameState
   }
 
-  saveScore() {
-    var result = this.hangmanWord;
-    result.duration = this.duration;
+  saveScore () {
+    var result = this.hangmanWord
+    result.duration = this.duration
     try {
-      fs.writeFileSync(this.resultFile, JSON.stringify(result));
-    }
-    catch(err) {
-      console.error('File exception : '+ err);
+      fs.writeFileSync(this.resultFile, JSON.stringify(result))
+    } catch (err) {
+      console.error('File exception : ' + err)
     }
   }
 
-  render() {
-    const self = this;
-    const hangmanTerm = self.hangmanWord.term;
-    self.clear();
+  render () {
+    const self = this
+    const hangmanTerm = self.hangmanWord.term
+    self.clear()
 
     const table = new Table({
       colWidths: this._initialiseHangmanWordSlot(hangmanTerm, 3)
-    });
-    table.push(self.tableContent);
-    const result = self.getResult();
-    console.log(table.toString());
+    })
+    table.push(self.tableContent)
+    const result = self.getResult()
+    console.log(table.toString())
     console.log('MEANING: ' + self.hangmanWord.definition)
     switch (result) {
-    case 1:
-      self.output.write('\nYou won'.success);
-      this.saveScore();
-      process.exit(0);
-      break;
-    case 0:
-      self.output.write('\nGame over !'.fail);
-      process.exit(0);
-      break;
+      case 1:
+        self.output.write('\nYou won'.success)
+        this.saveScore()
+        process.exit(0)
+        break
+      case 0:
+        self.output.write('\nGame over !'.fail)
+        process.exit(0)
+        break
     }
   }
 
-  updateGame(keyGuessed) {
-    var self = this;
-    const hangmanTerm = self.hangmanWord.term;
+  updateGame (keyGuessed) {
+    var self = this
+    const hangmanTerm = self.hangmanWord.term
     if (!hangmanTerm.includes(keyGuessed)) {
-      self.chances--;
+      self.chances--
       if (self.chances <= 0) {
-        self.tableContent = hangmanTerm.split('');
+        self.tableContent = hangmanTerm.split('')
       }
-    }
-    else {
-      const indicesFound = self.charPos(hangmanTerm, keyGuessed);
+    } else {
+      const indicesFound = self.charPos(hangmanTerm, keyGuessed)
       indicesFound.forEach(function (index) {
-        self.tableContent[index] = keyGuessed.success;
-      });
+        self.tableContent[index] = keyGuessed.success
+      })
     }
   }
-  
-  start() {
-    const self = this;
-    const singleAlphaRegex = /^[a-zA-Z]$/;
-    this.startTime = Date.now();
-    self.render();
-    self.input.on('keypress', function (ch, key) {      
+
+  start () {
+    const self = this
+    const singleAlphaRegex = /^[a-zA-Z]$/
+    this.startTime = Date.now()
+    self.render()
+    self.input.on('keypress', function (ch, key) {
       if (!key || !singleAlphaRegex.test(key.name.toString())) {
-        return;
+        return
       }
 
-      self.updateGame(key.name);
-      self.render();
-    });
+      self.updateGame(key.name)
+      self.render()
+    })
   }
-};
+}
 
-module.exports = HangmanGame;
+module.exports = HangmanGame

@@ -5,8 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha -R spec --recursive test"
+    "test": "standard && mocha -R spec --recursive test"
   },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  },
+  "pre-commit": [
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/argonlaser/hangman-game.git"
@@ -31,12 +39,11 @@
     "cli-table": "^0.3.1",
     "commander": "^2.9.0",
     "fs": "0.0.1-security",
-    "keypress": "^0.2.1",
-    "path": "^0.12.7"
+    "keypress": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^2.13.1",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "standard": "^8.1.0"
   }
 }
