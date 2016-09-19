@@ -4,7 +4,20 @@
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
 const gameOptions = require('./game/config')
+const HangmanArt = require('hangman-cli-art')
+const axel = require('axel')
+
 let game = null
+const hangmanArt = new HangmanArt({
+  marginX: 60,
+  marginY: 5
+})
+
+axel.brush = '.'
+axel.line(0, 0, 110, 0)
+axel.line(0, 0, 0, 50)
+axel.line(110, 0, 110, 50)
+axel.line(0, 50, 110, 50)
 
 program
   .version('0.0.1')
@@ -20,7 +33,6 @@ if (program.freq) {
   // Default is high frequency game
   game = new HangmanGame(gameOptions[0])
 }
-
 // game.start()
 
 process.stdin.on('keypress', function (ch, key) {
@@ -32,11 +44,11 @@ process.stdin.on('keypress', function (ch, key) {
     key.name,
     function () {
       // correct Guess
-      console.log('render for correct guess')
+      axel.text(10, 10, key.name)
     },
     function () {
       // wrong Guess
-      console.log('render for wrong guess')
+      hangmanArt.next()
     }
   )
 })
