@@ -9,7 +9,7 @@ const axel = require('axel')
 
 let game = null
 const hangmanArt = new HangmanArt({
-  marginX: 60,
+  marginX: 5,
   marginY: 5
 })
 
@@ -30,15 +30,21 @@ if (program.freq) {
 // game.start()
 
 process.stdin.on('keypress', function (ch, key) {
-  if (key && key.ctrl && key.name === 'c') {
+  if (!key) {
+    return
+  }
+  if (!key.name) {
+    return
+  }
+  if (key.ctrl && key.name === 'c') {
     process.exit(0)
   }
 
   game.nextTurn(
-    key.name,
+    key.name.toString(),
     function () {
       // correct Guess
-      axel.text(10, 10, key.name)
+      axel.text(5, 60, JSON.stringify(this.tableContent))
     },
     function () {
       // wrong Guess
