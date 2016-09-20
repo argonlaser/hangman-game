@@ -15,11 +15,4 @@ describe('HangmanGame', function () {
     should.not.equal(hangmanWord.term, undefined)
     should.not.equal(hangmanWord.definition, undefined)
   })
-
-  it('should get all indices of a letter in a word', function () {
-    const hangmanWord = 'abcdeabcdeplsmj'
-    const aIndices = [0, 5]
-    expect(game.charPos(hangmanWord, 'a')).to.deep.equals(aIndices)
-  })
 })
-

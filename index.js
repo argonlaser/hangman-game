@@ -6,7 +6,10 @@ const program = require('commander')
 const keypress = require('keypress')
 const gameOptions = require('./game/config')
 const ConsoleUI = require('./game/consoleUI')
+const HighScoreStore = require('./game/HighScoreStore')
+
 const consoleUI = new ConsoleUI(process.stdin, process.stdout)
+
 let game = null
 let gameDetails = null
 
@@ -24,16 +27,14 @@ if (program.freq) {
   // Default is high frequency game
   game = new HangmanGame(gameOptions[0])
 }
-// game.start()
 
-console.log(game.init())
 consoleUI.render(game.init())
 
 keypress(process.stdin)
 process.stdin.setRawMode('true')
 
 process.stdin.on('keypress', function (ch, key) {
-  if(!key || !key.name) {
+  if (!key || !key.name) {
     return
   }
 
@@ -44,7 +45,9 @@ process.stdin.on('keypress', function (ch, key) {
   gameDetails = game.nextTurn(key.name)
   consoleUI.render(gameDetails)
 
-  if(gameDetails.gameState !== -1) {
-    process.exit(0);
+  if (gameDetails.gameState !== -1) {
+    const highScore = new HighScoreStore(gameDetails)
+    highScore.save()
+    process.exit(0)
   }
 })

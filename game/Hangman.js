@@ -1,19 +1,16 @@
 'use strict'
 const parseJson = require('../parseJson.js')
-const fs = require('fs')
 const utils = require('./utils')
 
 class HangmanGame {
   constructor (gameOptions) {
     this.chances = 7
     this.gameState = -1
-    this.currentScore = 0
     this.guessed = []
     this.missed = []
     this.resultFile = gameOptions.resultFile
     this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile)
     this.initHangmanTable()
-    this.initHighScore(gameOptions.resultFile)
   }
 
   initHangmanTable () {
@@ -23,19 +20,6 @@ class HangmanGame {
   getRandomHangmanWord (fileName) {
     const wordsJson = parseJson(fileName)
     return wordsJson[Math.floor(Math.random() * wordsJson.length)]
-  }
-
-  initHighScore (resultFile) {
-    this.highestScore = this.readHighestScore(resultFile)
-  }
-
-  readHighestScore (resultFile) {
-    try {
-      const result = fs.readFileSync(resultFile).toString()
-      return result.duration
-    } catch (err) {
-      return 0
-    }
   }
 
   getGameState () {
@@ -50,20 +34,6 @@ class HangmanGame {
     }
 
     return this.gameState
-  }
-
-  getScore () {
-    return this.duration
-  }
-
-  saveScore () {
-    var result = this.hangmanWord
-    result.duration = this.duration
-    try {
-      fs.writeFileSync(this.resultFile, JSON.stringify(result))
-    } catch (err) {
-      console.error('File exception : ' + err)
-    }
   }
 
   guessKey (keyGuessed) {
@@ -89,23 +59,25 @@ class HangmanGame {
         }
       })
 
-
       return true
     }
   }
 
   init () {
+    this.startTime = Date.now()
     return this.getDetails()
   }
 
   getDetails () {
     return {
-      tableContent : this.tableContent,
-      hangmanWord : this.hangmanWord,
-      gameState : this.getGameState(),
-      guessed : this.guessed,
-      missed : this.missed,
-      chances : this.chances
+      tableContent: this.tableContent,
+      hangmanWord: this.hangmanWord,
+      gameState: this.getGameState(),
+      guessed: this.guessed,
+      missed: this.missed,
+      chances: this.chances,
+      duration: this.duration,
+      resultFile: this.resultFile
     }
   }
 
@@ -117,7 +89,7 @@ class HangmanGame {
       return self.getDetails()
     }
 
-    const isRightGuess = self.guessKey(key)
+    self.guessKey(key)
     return self.getDetails()
   }
 }

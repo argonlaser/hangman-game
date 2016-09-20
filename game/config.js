@@ -1,6 +1,6 @@
 const hangmanHFwordsFile = './data/hf_words.json'
 const hangmanGREwordsFile = './data/gre_words.json'
-const resultFile = './results/results.json'
+const resultFile = './results.json'
 
 const gameOptions =
   [
