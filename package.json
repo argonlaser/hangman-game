@@ -37,6 +37,7 @@
   "dependencies": {
     "cli-clear": "^1.0.4",
     "cli-table": "^0.3.1",
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "fs": "0.0.1-security",
     "keypress": "^0.2.1"

@@ -3,8 +3,12 @@
 
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
+const keypress = require('keypress')
 const gameOptions = require('./game/config')
+const ConsoleUI = require('./game/consoleUI')
+const consoleUI = new ConsoleUI(process.stdin, process.stdout)
 let game = null
+let gameDetails = null
 
 program
   .version('0.0.1')
@@ -20,23 +24,27 @@ if (program.freq) {
   // Default is high frequency game
   game = new HangmanGame(gameOptions[0])
 }
-
 // game.start()
 
+console.log(game.init())
+consoleUI.render(game.init())
+
+keypress(process.stdin)
+process.stdin.setRawMode('true')
+
 process.stdin.on('keypress', function (ch, key) {
+  if(!key || !key.name) {
+    return
+  }
+
   if (key && key.ctrl && key.name === 'c') {
     process.exit(0)
   }
 
-  game.nextTurn(
-    key.name,
-    function () {
-      // correct Guess
-      console.log('render for correct guess')
-    },
-    function () {
-      // wrong Guess
-      console.log('render for wrong guess')
-    }
-  )
+  gameDetails = game.nextTurn(key.name)
+  consoleUI.render(gameDetails)
+
+  if(gameDetails.gameState !== -1) {
+    process.exit(0);
+  }
 })
