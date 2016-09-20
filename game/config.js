@@ -9,14 +9,26 @@ const gameOptions =
       input: process.stdin,
       output: process.stdout,
       datasrcFile: hangmanHFwordsFile,
-      resultFile: resultFile
+      resultFile: resultFile,
+      onInit: function () {
+        // Initialise all game related external resources here
+      },
+      onEnd: function () {
+        // Save all game related external resources here
+      }
     },
     {
       name: 'gre_words',
       input: process.stdin,
       output: process.stdout,
       datasrcFile: hangmanGREwordsFile,
-      resultFile: resultFile
+      resultFile: resultFile,
+      onInit: function () {
+        // Initialise all game related external resources here
+      },
+      onEnd: function () {
+        // Save all game related external resources here
+      }
     }
   ]
 

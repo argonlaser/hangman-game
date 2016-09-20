@@ -11,6 +11,10 @@ class HangmanGame {
     this.resultFile = gameOptions.resultFile
     this.hangmanWord = this.getRandomHangmanWord(gameOptions.datasrcFile)
     this.initHangmanTable()
+
+    if (typeof gameOptions.onInit === 'function') {
+      gameOptions.onInit()
+    }
   }
 
   initHangmanTable () {
