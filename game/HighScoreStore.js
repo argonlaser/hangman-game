@@ -8,12 +8,9 @@ class HighScoreStore {
     this.highScore = this.getDuration()
   }
   save () {
-    console.log('SAVE')
     var result = this.hangmanWord
     result.duration = this.duration
-    console.log(this.duration + ' ' + this.highScore)
     try {
-      console.log(this.duration + ' ' + this.highScore)
       if (this.duration < this.highScore) {
         fs.writeFileSync(this.resultFile, JSON.stringify(result), 'utf8')
       }
