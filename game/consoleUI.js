@@ -24,7 +24,7 @@ class consoleUI {
     const self = this
     const hangmanTerm = gameDetails.hangmanWord.term
 
-    // self.clearConsole()
+    self.clearConsole()
     const table = new Table({
       colWidths: utils.initialiseHangmanWordSlot(hangmanTerm.length, 3)
     })
