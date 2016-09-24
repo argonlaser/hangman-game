@@ -1,6 +1,6 @@
 {
   "name": "hangman-game",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Guessing words is fun !!!",
   "main": "index.js",
   "scripts": {
