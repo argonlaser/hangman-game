@@ -6,8 +6,6 @@
 [![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Issues](https://img.shields.io/github/issues/argonlaser/hangman-game.svg)](https://github.com/argonlaser/hangman-game/issues)
-[![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Motivation
 ------
