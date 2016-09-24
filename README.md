@@ -1,8 +1,14 @@
 # hangman-game
+<<<<<<< HEAD
 Guess the word ! Improve vocabulary ! Have fun !
 
 ![](docs/images/hangmanGif.gif)
 
+=======
+[![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Issues](https://img.shields.io/github/issues/argonlaser/hangman-game.svg)](https://github.com/argonlaser/hangman-game/issues)
+>>>>>>> Update README.md
 
 [![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -28,6 +34,26 @@ $ hangman
 ```
 
 ![](docs/images/usage.PNG)
+----
+```bash
+hangman
+```
+
+Help
+----
+```
+$ hangman -h
+  Usage: hangman [options]
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+    -g, --gre      displays a word from gre words
+    -f, --freq     displays a word from high frequency gre words
+    -s, --score    displays your highScore
+
+```
 
 Test
 ------
@@ -38,9 +64,8 @@ $ npm test
 
 Contributing
 ------
-__Bugs and requests__: submit them through the project's issues tracker.<br>
-[![Issues](https://img.shields.io/github/issues/argonlaser/hangman-game.svg)]( https://github.com/argonlaser/hangman-game/issues )
-__PRs always welcome !__
+- __Bugs and requests__ - submit [here](https://github.com/argonlaser/hangman-game/issues)
+- __PRs always welcome !__
 
 Thanks
 ------
