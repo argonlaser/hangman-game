@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
 const keypress = require('keypress')
