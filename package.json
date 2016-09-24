@@ -1,6 +1,6 @@
 {
   "name": "hangman-game",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Guessing words is fun !!!",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,11 @@
   },
   "standard": {
     "ignore": [
-    "/view/consoleClear.js"
-  ],
-  "env": [
-    "mocha"
-  ]
+      "/view/consoleClear.js"
+    ],
+    "env": [
+      "mocha"
+    ]
   },
   "bin": {
     "hangman": "./index.js"
