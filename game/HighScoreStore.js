@@ -1,3 +1,4 @@
+'use strict'
 const fs = require('fs')
 
 class HighScoreStore {
@@ -19,6 +20,13 @@ class HighScoreStore {
     }
   }
 
+  fetch () {
+    return JSON.stringify({
+      resultFile: this.resultFile,
+      hangmanWord: this.hangmanWord,
+      highScore: this.highScore
+    })
+  }
   getDuration () {
     try {
       const result = fs.readFileSync(this.resultFile).toString()

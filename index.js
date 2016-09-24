@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use strict'
 
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
@@ -10,8 +9,8 @@ const HighScoreStore = require('./game/HighScoreStore')
 
 const consoleUI = new ConsoleUI(process.stdin, process.stdout)
 
-let game = null
-let gameDetails = null
+var game = null
+var gameDetails = null
 
 program
   .version('0.0.1')
@@ -45,9 +44,12 @@ process.stdin.on('keypress', function (ch, key) {
   gameDetails = game.nextTurn(key.name)
   consoleUI.render(gameDetails)
 
-  if (gameDetails.gameState !== -1) {
+  if (gameDetails.gameState === 1) {
     const highScore = new HighScoreStore(gameDetails)
     highScore.save()
+    consoleUI.write(highScore.fetch())
+    process.exit(0)
+  } else if (gameDetails.gameState === 0) {
     process.exit(0)
   }
 })

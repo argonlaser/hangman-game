@@ -4,7 +4,7 @@ const utils = require('./utils')
 
 class HangmanGame {
   constructor (gameOptions) {
-    this.chances = 7
+    this.chances = gameOptions.chances || 7
     this.gameState = -1
     this.guessed = []
     this.missed = []

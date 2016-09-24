@@ -12,9 +12,9 @@
       "mocha"
     ]
   },
-  "pre-commit": [
-    "test"
-  ],
+  "bin": {
+    "hangman": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/argonlaser/hangman-game.git"
