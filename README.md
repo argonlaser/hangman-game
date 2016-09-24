@@ -24,7 +24,7 @@ Install
 ------
 
 ```bash
-npm install -g hangman-game
+$ npm install -g hangman-game
 ```
 
 Play
@@ -36,7 +36,7 @@ $ hangman
 ![](docs/images/usage.PNG)
 ----
 ```bash
-hangman
+$ hangman
 ```
 
 Help
