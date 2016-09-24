@@ -16,13 +16,13 @@ Install
 -------
 
 ```bash
-npm install -g hangman-game
+$ npm install -g hangman-game
 ```
 
 Play
 ----
 ```bash
-hangman
+$ hangman
 ```
 
 Help
@@ -44,8 +44,8 @@ $ hangman -h
 Test
 ------
 
-```javascript
-npm test
+```bash
+$ npm test
 ```
 
 Contributing
