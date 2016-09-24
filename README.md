@@ -1,15 +1,11 @@
 # hangman-game
-<<<<<<< HEAD
 Guess the word ! Improve vocabulary ! Have fun !
 
 ![](docs/images/hangmanGif.gif)
 
-=======
 [![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Issues](https://img.shields.io/github/issues/argonlaser/hangman-game.svg)](https://github.com/argonlaser/hangman-game/issues)
->>>>>>> Update README.md
-
 [![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
@@ -30,12 +26,6 @@ $ npm install -g hangman-game
 Play
 ------
 ```
-$ hangman
-```
-
-![](docs/images/usage.PNG)
-----
-```bash
 $ hangman
 ```
 
