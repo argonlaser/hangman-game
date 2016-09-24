@@ -1,10 +1,11 @@
 # hangman-game
+Guess the word ! Improve vocabulary ! Have fun !
 
-[![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![](docs/images/hangmanGif.gif)
 
+
+[![Join the chat at https://gitter.im/hangman-game/Lobby](https://badges.gitter.im/hangman-game/Lobby.svg)](https://gitter.im/hangman-game/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-
-Guess the word if you can !!!
 
 Motivation
 ------
@@ -13,12 +14,22 @@ Motivation
 * Are you bored of memorizing words and meanings?
 * Are you looking for a fun way to memorize?
 
-Play
+Install
 ------
 
 ```javascript
-npm start
+npm install -g hangman-game
 ```
+
+Play
+------
+```
+$ hangman
+```
+![](docs/images/usage.PNG)
+
+
+
 
 Test
 ------
