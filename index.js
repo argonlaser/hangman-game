@@ -6,7 +6,7 @@ const path = require('path')
 const keypress = require('keypress')
 const gameOptions = require('./gameConfig/config')
 const ConsoleUI = require('./view/consoleUI')
-const HighScoreStore = require(path.join(__dirname + '/game/HighScoreStore'))
+const HighScoreStore = require(path.join(__dirname, '/game/HighScoreStore'))
 
 const consoleUI = new ConsoleUI(process.stdin, process.stdout)
 
