@@ -1,7 +1,7 @@
 'use strict'
 const Table = require('cli-table')
 const Colors = require('colors')
-const clearCli = require('cli-clear')
+const clearCli = require('./consoleClear')
 const utils = require('./utils')
 
 Colors.setTheme({

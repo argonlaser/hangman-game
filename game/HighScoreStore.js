@@ -8,6 +8,7 @@ class HighScoreStore {
     this.duration = options.duration
     this.highScore = this.getDuration()
   }
+
   save () {
     var result = this.hangmanWord
     result.duration = this.duration
@@ -21,12 +22,13 @@ class HighScoreStore {
   }
 
   fetch () {
-    return JSON.stringify({
+    return {
       resultFile: this.resultFile,
       hangmanWord: this.hangmanWord,
       highScore: this.highScore
-    })
+    }
   }
+
   getDuration () {
     try {
       const result = fs.readFileSync(this.resultFile).toString()

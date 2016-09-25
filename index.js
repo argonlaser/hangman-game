@@ -47,7 +47,6 @@ process.stdin.on('keypress', function (ch, key) {
   if (gameDetails.gameState === 1) {
     const highScore = new HighScoreStore(gameDetails)
     highScore.save()
-    consoleUI.write(highScore.fetch())
     process.exit(0)
   } else if (gameDetails.gameState === 0) {
     process.exit(0)
