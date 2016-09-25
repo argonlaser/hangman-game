@@ -12,9 +12,6 @@ const gameOptions =
       resultFile: resultFile,
       onInit: function () {
         // Initialise all game related external resources here
-      },
-      onEnd: function () {
-        // Save all game related external resources here
       }
     },
     {
@@ -25,9 +22,6 @@ const gameOptions =
       resultFile: resultFile,
       onInit: function () {
         // Initialise all game related external resources here
-      },
-      onEnd: function () {
-        // Save all game related external resources here
       }
     }
   ]
