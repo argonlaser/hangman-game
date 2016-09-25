@@ -1,9 +1,10 @@
 'use strict'
 const fs = require('fs')
+const path = require('path')
 
 class HighScoreStore {
   constructor (options) {
-    this.resultFile = options && options.resultFile || './results.json'
+    this.resultFile = (options && options.resultFile) || path.join(__dirname, '../results.json')
     this.hangmanWord = options && options.hangmanWord
     this.duration = options && options.duration
     this.highScore = this.getDuration()
