@@ -1,10 +1,12 @@
 #!/usr/bin/env node
+
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
+const path = require('path')
 const keypress = require('keypress')
 const gameOptions = require('./gameConfig/config')
 const ConsoleUI = require('./view/consoleUI')
-const HighScoreStore = require('./game/HighScoreStore')
+const HighScoreStore = require(path.join(__dirname, 'game/HighScoreStore'))
 
 const consoleUI = new ConsoleUI(process.stdin, process.stdout)
 

@@ -3,7 +3,8 @@ const Table = require('cli-table')
 const Colors = require('colors')
 const clearCli = require('./consoleClear')
 const utils = require('../utils/utils')
-const HighScoreStore = require('../game/HighScoreStore')
+const path = require('path')
+const HighScoreStore = require(path.join(__dirname, '../game/HighScoreStore'))
 
 Colors.setTheme({
   cWin: 'green',
