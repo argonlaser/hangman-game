@@ -58,8 +58,8 @@ Contributing
 Thanks
 ------
 Thanks the awesome repos that had the gre words and meanings.
-* [gre-classics] (https://github.com/avinassh/gre-classics)
-* [Pervasive-GRE] (https://github.com/yiransheng/Pervasive-GRE)
+* [gre-classics](https://github.com/avinassh/gre-classics)
+* [Pervasive-GRE](https://github.com/yiransheng/Pervasive-GRE)
 
 Thanks to the awesome packages, that makes this project possible.
 ```json

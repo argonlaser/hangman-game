@@ -1,6 +1,7 @@
-const hangmanHFwordsFile = './data/hf_words.json'
-const hangmanGREwordsFile = './data/gre_words.json'
-const resultFile = './results.json'
+const path = require('path')
+const hangmanHFwordsFile = path.join(__dirname, '../data/hf_words.json')
+const hangmanGREwordsFile = path.join(__dirname, '../data/gre_words.json')
+const resultFile = path.join(__dirname, '../results.json')
 
 const gameOptions =
   [
