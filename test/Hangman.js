@@ -2,7 +2,7 @@ const HangmanGame = require('../game/Hangman')
 const chai = require('chai')
 const expect = chai.expect
 const should = chai.should()
-const gameOptions = require('../game/config')
+const gameOptions = require('../gameConfig/config')
 
 describe('HangmanGame', function () {
   const game = new HangmanGame(gameOptions[0])

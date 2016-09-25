@@ -3,8 +3,8 @@
 const HangmanGame = require('./game/Hangman')
 const program = require('commander')
 const keypress = require('keypress')
-const gameOptions = require('./game/config')
-const ConsoleUI = require('./game/consoleUI')
+const gameOptions = require('./gameConfig/config')
+const ConsoleUI = require('./view/consoleUI')
 const HighScoreStore = require('./game/HighScoreStore')
 
 const consoleUI = new ConsoleUI(process.stdin, process.stdout)

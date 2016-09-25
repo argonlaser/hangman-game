@@ -2,7 +2,7 @@
 const Table = require('cli-table')
 const Colors = require('colors')
 const clearCli = require('./consoleClear')
-const utils = require('./utils')
+const utils = require('./game/utils')
 
 Colors.setTheme({
   cWin: 'green',

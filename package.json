@@ -8,9 +8,12 @@
     "test": "standard --fix && mocha -R spec --recursive test"
   },
   "standard": {
-    "env": [
-      "mocha"
-    ]
+    "ignore": [
+    "/view/consoleClear.js"
+  ],
+  "env": [
+    "mocha"
+  ]
   },
   "bin": {
     "hangman": "./index.js"
