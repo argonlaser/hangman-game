@@ -3,9 +3,9 @@ const fs = require('fs')
 
 class HighScoreStore {
   constructor (options) {
-    this.resultFile = options.resultFile
-    this.hangmanWord = options.hangmanWord
-    this.duration = options.duration
+    this.resultFile = options && options.resultFile || './results.json'
+    this.hangmanWord = options && options.hangmanWord
+    this.duration = options && options.duration
     this.highScore = this.getDuration()
   }
 
@@ -22,20 +22,18 @@ class HighScoreStore {
   }
 
   fetch () {
-    return {
-      resultFile: this.resultFile,
-      hangmanWord: this.hangmanWord,
-      highScore: this.highScore
+    try {
+      const result = fs.readFileSync(this.resultFile).toString()
+      return JSON.parse(result)
+    } catch (err) {
+      return {
+        duration: Number.MAX_SAFE_INTEGER
+      }
     }
   }
 
   getDuration () {
-    try {
-      const result = fs.readFileSync(this.resultFile).toString()
-      return result.duration
-    } catch (err) {
-      return Number.MAX_SAFE_INTEGER
-    }
+    return this.fetch().duration
   }
 }
 

@@ -1,6 +1,6 @@
 'use strict'
 const parseJson = require('../parseJson.js')
-const utils = require('./utils')
+const utils = require('../utils/utils')
 
 class HangmanGame {
   constructor (gameOptions) {

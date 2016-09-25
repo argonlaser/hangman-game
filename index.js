@@ -14,14 +14,18 @@ var gameDetails = null
 
 program
   .version('0.0.1')
-  .option('-g, --gre', 'Shows gre words')
-  .option('-f, --freq', 'Shows frequent gre words')
+  .option('-g, --gre', 'displays a word from gre words')
+  .option('-f, --freq', 'displays a word from high frequency gre words')
+  .option('-s, --score', 'displays your highScore')
   .parse(process.argv)
 
 if (program.freq) {
   game = new HangmanGame(gameOptions[0])
 } else if (program.gre) {
   game = new HangmanGame(gameOptions[1])
+} else if (program.score) {
+  consoleUI.printHighScore()
+  process.exit(0)
 } else {
   // Default is high frequency game
   game = new HangmanGame(gameOptions[0])

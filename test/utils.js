@@ -1,6 +1,6 @@
 const chai = require('chai')
 const expect = chai.expect
-const utils = require('../game/utils')
+const utils = require('../utils/utils')
 
 describe('Utils', function () {
   it('#charPos - should get all indices of a letter in a word', function () {

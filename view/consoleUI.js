@@ -2,7 +2,8 @@
 const Table = require('cli-table')
 const Colors = require('colors')
 const clearCli = require('./consoleClear')
-const utils = require('../game/utils')
+const utils = require('../utils/utils')
+const HighScoreStore = require('../game/HighScoreStore')
 
 Colors.setTheme({
   cWin: 'green',
@@ -11,13 +12,23 @@ Colors.setTheme({
   cMissed: 'yellow',
   cGuessed: 'green',
   cMeaning: 'cyan',
-  cChances: 'magenta'
+  cChances: 'magenta',
+  cTerm: 'yellow'
 })
 
 class consoleUI {
   constructor (input, output) {
     this.input = process.stdin
     this.output = process.stdout
+  }
+
+  printHighScore () {
+    const highScoreStore = new HighScoreStore()
+    const highScore = highScoreStore.fetch()
+
+    this.output.write('\nHIGHSCORE : ' + utils.formatTime(highScore.duration).cBold.cWin)
+    this.output.write('\nYOUR WORD : ' + highScore.term.cTerm)
+    this.output.write('\nYOUR WORD : ' + highScore.definition.cMeaning)
   }
 
   clearConsole () {
@@ -28,6 +39,7 @@ class consoleUI {
     const self = this
     self.output.write(data)
   }
+
   render (gameDetails) {
     const self = this
     const hangmanTerm = gameDetails.hangmanWord.term
