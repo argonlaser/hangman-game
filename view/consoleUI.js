@@ -27,9 +27,13 @@ class consoleUI {
     const highScoreStore = new HighScoreStore()
     const highScore = highScoreStore.fetch()
 
-    this.output.write('\nHIGHSCORE : ' + utils.formatTime(highScore.duration).cBold.cWin)
-    this.output.write('\nYOUR WORD : ' + highScore.term.cTerm)
-    this.output.write('\nYOUR MEANING : ' + highScore.definition.cMeaning)
+    if (highScore && highScore.term && highScore.definition) {
+      this.output.write('\nHIGHSCORE : ' + utils.formatTime(highScore.duration).cBold.cWin)
+      this.output.write('\nYOUR WORD : ' + highScore.term.cTerm)
+      this.output.write('\nYOUR MEANING : ' + highScore.definition.cMeaning)
+    } else {
+      this.output.write('\nNo high scores yet !'.cLose)
+    }
   }
 
   clearConsole () {
