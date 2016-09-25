@@ -1,0 +1,9 @@
+language: node_js
+
+version:
+  - 4.4.7 
+
+build:
+  ci:
+    - npm install
+    - npm test
