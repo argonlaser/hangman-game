@@ -28,7 +28,7 @@ class consoleUI {
 
     this.output.write('\nHIGHSCORE : ' + utils.formatTime(highScore.duration).cBold.cWin)
     this.output.write('\nYOUR WORD : ' + highScore.term.cTerm)
-    this.output.write('\nYOUR WORD : ' + highScore.definition.cMeaning)
+    this.output.write('\nYOUR MEANING : ' + highScore.definition.cMeaning)
   }
 
   clearConsole () {
